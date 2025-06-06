@@ -62,10 +62,8 @@ function processCommand(event) {
         let mq135Value = doc.mq135Value;
         console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
         if (temperature >= 0) {
-            console.log('hid');
             document.querySelector('#minus').style.visibility = 'hidden';
         } else {
-            console.log('shw');
             document.querySelector('#minus').style.visibility = 'visible';
         }
         document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
