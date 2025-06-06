@@ -54,11 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function processCommand(event) {
         let doc = JSON.parse(event.data);
-        document.querySelector('#temp').innerHTML = `${doc.temperature}`;
-        document.querySelector('#hum').innerHTML = `${doc.humidity}`;
-        document.querySelector('#press').innerHTML = `${doc.pressure}`;
-        document.querySelector('#light').innerHTML = `${doc.lightValue}`;
-        document.querySelector('#mq').innerHTML = `${doc.mq135Value}`;
+        let temperature = doc.temperature; 
+        let humidity = doc.humidity;
+        let pressure = doc.pressure;
+        let lightValue = doc.lightValue;
+        let mq135Value = doc.mq135Value;
+        document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
+        document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
+        document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
+        document.querySelector('#light').innerHTML = `${lightValue}`;
+        document.querySelector('#mq').innerHTML = `${mq135Value}`;
     }
 
     Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
