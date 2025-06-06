@@ -60,7 +60,7 @@ function processCommand(event) {
     let lightValue = doc.lightValue;
     let mq135Value = doc.mq135Value;
     console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
-    if (temperature <= 0) {
+    if (temperature >= 0) {
         console.log('hid');
         document.querySelector('#minus').style.visibility = 'hidden';
     } else {
@@ -74,7 +74,11 @@ function processCommand(event) {
     document.querySelector('#mq').innerHTML = `${mq135Value}`;
 }
 
-Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
-Socket.onmessage = processCommand;
+if (window.Socket && window.Socket.readyState !== WebSocket.CLOSED) {
+    window.Socket.close();
+}
+
+window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+window.Socket.onmessage = processCommand;
 
 
