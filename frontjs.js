@@ -74,11 +74,7 @@ function processCommand(event) {
     document.querySelector('#mq').innerHTML = `${mq135Value}`;
 }
 
-if (window.Socket && window.Socket.readyState !== WebSocket.CLOSED) {
-    window.Socket.close();
-}
-
-window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
-window.Socket.onmessage = processCommand;
+//window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+//window.Socket.onmessage = processCommand;
 
 
