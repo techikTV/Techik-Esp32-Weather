@@ -53,7 +53,24 @@ document.addEventListener("DOMContentLoaded", function () {
 let Socket;
 
 function processCommand(event) {
-    let doc = JSON.parse(event.data);
+    try {
+        doc = JSON.parse(event.data);
+    } catch (e) {
+        console.warn("Incorect JSON:", event.data);
+        return; 
+    }
+
+    if (
+        doc.temperature === undefined ||
+        doc.humidity === undefined ||
+        doc.pressure === undefined ||
+        doc.lightValue === undefined ||
+        doc.mq135Value === undefined
+    ) {
+        console.warn("undefined skip", doc);
+        return;
+    }
+
     let temperature = doc.temperature;
     let humidity = doc.humidity;
     let pressure = doc.pressure;
@@ -74,7 +91,7 @@ function processCommand(event) {
     document.querySelector('#mq').innerHTML = `${mq135Value}`;
 }
 
-//window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
-//window.Socket.onmessage = processCommand;
+window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+window.Socket.onmessage = processCommand;
 
 
