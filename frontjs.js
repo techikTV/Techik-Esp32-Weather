@@ -1,4 +1,4 @@
-window.stop && window.stop(); 
+window.stop && window.stop();
 document.addEventListener("DOMContentLoaded", function () {
     console.log('load');
     if (document.body) {
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!document.body) {
         const newBody = document.createElement("body");
-        document.documentElement.appendChild(newBody); 
+        document.documentElement.appendChild(newBody);
     }
 
     document.head.insertAdjacentHTML("beforeend", `
@@ -45,28 +45,33 @@ document.addEventListener("DOMContentLoaded", function () {
         </section>
     </section>
     `);
-        document.getElementById('refresh').addEventListener('click', () => {
+    document.getElementById('refresh').addEventListener('click', () => {
         let msg = { refresh: true };
         Socket.send(JSON.stringify(msg));
     });
 });
-    let Socket;
+let Socket;
 
-    function processCommand(event) {
-        let doc = JSON.parse(event.data);
-        let temperature = doc.temperature; 
-        let humidity = doc.humidity;
-        let pressure = doc.pressure;
-        let lightValue = doc.lightValue;
-        let mq135Value = doc.mq135Value;
-        document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
-        document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
-        document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
-        document.querySelector('#light').innerHTML = `${lightValue}`;
-        document.querySelector('#mq').innerHTML = `${mq135Value}`;
+function processCommand(event) {
+    let doc = JSON.parse(event.data);
+    let temperature = doc.temperature;
+    let humidity = doc.humidity;
+    let pressure = doc.pressure;
+    let lightValue = doc.lightValue;
+    let mq135Value = doc.mq135Value;
+    document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
+    if (temperature <= 0) {
+        document.querySelector('#minus').style.visibility = 'hidden';
+    } else {
+        document.querySelector('#minus').style.visibility = 'visible';
     }
+    document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
+    document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
+    document.querySelector('#light').innerHTML = `${lightValue}`;
+    document.querySelector('#mq').innerHTML = `${mq135Value}`;
+}
 
-    Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
-    Socket.onmessage = processCommand;
+Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+Socket.onmessage = processCommand;
 
 
