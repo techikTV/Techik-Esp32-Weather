@@ -59,12 +59,15 @@ function processCommand(event) {
     let pressure = doc.pressure;
     let lightValue = doc.lightValue;
     let mq135Value = doc.mq135Value;
+    console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
     if (temperature <= 0) {
+        console.log('hid');
         document.querySelector('#minus').style.visibility = 'hidden';
     } else {
+        console.log('shw');
         document.querySelector('#minus').style.visibility = 'visible';
     }
-    document.querySelector('#temp').innerHTML = `${temperature}`;
+    document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
     document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
     document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
     document.querySelector('#light').innerHTML = `${lightValue}`;
