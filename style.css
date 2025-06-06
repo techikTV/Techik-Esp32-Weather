@@ -1,1 +1,76 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+
+#tempDisplay {
+    font-size: 10em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#humDisplay {
+    padding: 0.5em;
+    font-size: 2em;
+    text-align: center;
+}
+
+#pressDisplay {
+    padding: 0.5em;
+    font-size: 2em;
+    text-align: center;
+}
+.box {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 2em;
+    text-align: center;
+    height: 10em;
+    width: 10em;
+}
+.block {
+    display: block;
+}
+#othersDisplay {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+#airQuality {
+    height: 33%;
+    font-size: 2em;
+    font-weight: bold;
+}
+#lightLevel {
+    height: 33%;
+    font-size: 2em;
+}
+.boxTitle {
+    font-size: 1em;
+    height: 33%;
+}
+.sensor {
+    height: 33%;
+}
+
+#refresh {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  z-index: 1000;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+#refresh:hover {
+  background-color: #0056b3;
+}
 
