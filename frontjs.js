@@ -68,11 +68,13 @@ function processCommand(event) {
             console.log('shw');
             document.querySelector('#minus').style.visibility = 'visible';
         }
-    document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
-    document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
-    document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
-    document.querySelector('#light').innerHTML = `${lightValue}`;
-    document.querySelector('#mq').innerHTML = `${mq135Value}`;
+        document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
+        document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
+        document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
+        document.querySelector('#light').innerHTML = `${lightValue}`;
+        document.querySelector('#mq').innerHTML = `${mq135Value}`;
+    } else {
+        console.warn(event.data);
     }
     
 }
