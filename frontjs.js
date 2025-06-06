@@ -53,45 +53,31 @@ document.addEventListener("DOMContentLoaded", function () {
 let Socket;
 
 function processCommand(event) {
-    try {
-        doc = JSON.parse(event.data);
-    } catch (e) {
-        console.warn("Incorect JSON:", event.data);
-        return; 
-    }
-
-    if (
-        doc.temperature === undefined ||
-        doc.humidity === undefined ||
-        doc.pressure === undefined ||
-        doc.lightValue === undefined ||
-        doc.mq135Value === undefined
-    ) {
-        console.warn("undefined skip", doc);
-        return;
-    }
-
-    let temperature = doc.temperature;
-    let humidity = doc.humidity;
-    let pressure = doc.pressure;
-    let lightValue = doc.lightValue;
-    let mq135Value = doc.mq135Value;
-    console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
-    if (temperature >= 0) {
-        console.log('hid');
-        document.querySelector('#minus').style.visibility = 'hidden';
-    } else {
-        console.log('shw');
-        document.querySelector('#minus').style.visibility = 'visible';
-    }
+    let doc = JSON.parse(event.data);
+    if (doc.temperature) {
+        let temperature = doc.temperature;
+        let humidity = doc.humidity;
+        let pressure = doc.pressure;
+        let lightValue = doc.lightValue;
+        let mq135Value = doc.mq135Value;
+        console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
+        if (temperature >= 0) {
+            console.log('hid');
+            document.querySelector('#minus').style.visibility = 'hidden';
+        } else {
+            console.log('shw');
+            document.querySelector('#minus').style.visibility = 'visible';
+        }
     document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
     document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
     document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
     document.querySelector('#light').innerHTML = `${lightValue}`;
     document.querySelector('#mq').innerHTML = `${mq135Value}`;
+    }
+    
 }
 
-window.Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
-window.Socket.onmessage = processCommand;
+Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+Socket.onmessage = processCommand;
 
 
