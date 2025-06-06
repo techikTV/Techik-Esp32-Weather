@@ -64,7 +64,7 @@ function processCommand(event) {
     } else {
         document.querySelector('#minus').style.visibility = 'visible';
     }
-    document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
+    document.querySelector('#temp').innerHTML = `${temperature}`;
     document.querySelector('#hum').innerHTML = `${Math.round(humidity)}`;
     document.querySelector('#press').innerHTML = `${Math.round(pressure)}`;
     document.querySelector('#light').innerHTML = `${lightValue}`;
