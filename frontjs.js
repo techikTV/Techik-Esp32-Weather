@@ -87,15 +87,16 @@ const maxReloads = 5;
 function checkBodyFlex() {
   const bodyStyle = window.getComputedStyle(document.body);
   if (bodyStyle.display !== 'flex') {
-    console.warn('Has no display:flex, reloading');
+    console.warn('Has no display:flex, reloading with cache bypass');
     if (reloadAttempts < maxReloads) {
       reloadAttempts++;
-      location.reload();
+      location.href = window.location.href.split('?')[0] + '?reload=' + new Date().getTime();
     }
   } else {
     console.log('Loaded correctly.');
   }
 }
+
 
 //reload on no websocket connection
 function checkWebSocketConnection() {
