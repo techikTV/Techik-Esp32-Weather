@@ -79,4 +79,23 @@ function processCommand(event) {
 Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
 Socket.onmessage = processCommand;
 
+let reloadAttempts = 0;
+const maxReloads = 5;
+
+function checkBodyFlex() {
+  const bodyStyle = window.getComputedStyle(document.body);
+  if (bodyStyle.display !== 'flex') {
+    console.warn('Has no display:flex, reloading');
+    if (reloadAttempts < maxReloads) {
+      reloadAttempts++;
+      location.reload();
+    }
+  } else {
+    console.log('Loaded correctly.');
+  }
+}
+
+window.addEventListener('load', () => {
+  setTimeout(checkBodyFlex, 3000);
+});
 
