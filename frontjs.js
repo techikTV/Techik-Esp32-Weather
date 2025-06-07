@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let msg = { refresh: true };
         Socket.send(JSON.stringify(msg));
     });
+    setTimeout(checkBodyFlex, 3000);
 });
 let Socket;
 
@@ -94,8 +95,4 @@ function checkBodyFlex() {
     console.log('Loaded correctly.');
   }
 }
-
-window.addEventListener('load', () => {
-  setTimeout(checkBodyFlex, 3000);
-});
 
