@@ -9,11 +9,10 @@ html, body {
     background: linear-gradient(180deg, #e0f7fa 0%, #ffffff 100%);
     color: #333;
     min-height: 100vh;
-    display: flex;
+    display: flex; /* Js checks for it */
     justify-content: center;
     padding: 2rem 1rem;
-    font-size: 18px; /* bazowy rozmiar fontu */
-}
+    font-size: 18px; 
 
 #weather {
     max-width: 500px;
@@ -118,7 +117,7 @@ hr {
 /* ------------------- RESPONSYWNOŚĆ DLA WIĘKSZYCH EKRANÓW ------------------- */
 @media (min-width: 768px) {
     html, body {
-        font-size: 20px; /* większy font bazowy */
+        font-size: 20px;
     }
 
     #weather {
