@@ -18,32 +18,29 @@ document.addEventListener("DOMContentLoaded", function () {
         `);
 
     document.body.insertAdjacentHTML("beforeend", `
-        <button id="refresh">⟳</button>
-    <section id="top">
-        <section id="tempDisplay">
-            <span id="minus">-</span><span id="temp">10</span><span>&deg;</span>
+    <button id="refresh">⟳</button>
+    <main id="weather">
+        <section id="mainData">
+            <div id="tempDisplay">
+                <span id="minus">-</span><span id="temp">10</span><span>&deg;</span>
+            </div>
+            <div id="humDisplay">💧 <span id="hum">50</span>%</div>
+            <div id="pressDisplay">🌀 <span id="press">1001</span> hPa</div>
         </section>
-        <section id="humDisplay">
-            <span>💧</span><span id="hum">50</span><span>%</span>
-        </section>
-        <section id="pressDisplay">
-            <span>🌀</span><span id="press">1001</span><span>HpA</span>
-        </section>
-        <hr width="25%">
-        <br>
-        <section id="othersDisplay">
-            <section class="box">
-                <span class="block boxTitle">Jakość Powietrza</span>
+        <hr>
+        <section id="extraData">
+            <div class="card">
+                <div class="label">Jakość Powietrza</div>
                 <span class="block" id="airQuality">ŚREDNIA</span>
-                <div class="sensor"><span>(</span><span id="mq">800</span><span>)</span></div>
-            </section>
-            <section class="box">
-                <span class="block boxTitle">Jasność</span>
+                <div class="sensor">( <span id="mq">800</span> )</div>
+            </div>
+            <div class="card">
+                <div class="label">Jasność</div>
                 <span class="block" id="lightLevel">☀️</span>
-                <div class="sensor"><span>(</span><span id="light">2500</span><span>)</span></div>
-            </section>
+                <div class="sensor">( <span id="light">2500</span> )</div>
+            </div>
         </section>
-    </section>
+    </main>
     `);
     document.getElementById('refresh').addEventListener('click', () => {
         let msg = { refresh: true };
@@ -62,8 +59,10 @@ function processCommand(event) {
         let mq135Value = doc.mq135Value;
         console.log(`${temperature} ${humidity} ${pressure} ${lightValue} ${mq135Value}`);
         if (temperature >= 0) {
+            console.log('hid');
             document.querySelector('#minus').style.visibility = 'hidden';
         } else {
+            console.log('shw');
             document.querySelector('#minus').style.visibility = 'visible';
         }
         document.querySelector('#temp').innerHTML = `${temperature.toFixed(2)}`;
