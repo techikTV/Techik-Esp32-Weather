@@ -80,6 +80,7 @@ function processCommand(event) {
 Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
 Socket.onmessage = processCommand;
 
+//checking if css is loaded correctly (because sometimes not for some reason)
 let reloadAttempts = 0;
 const maxReloads = 5;
 
@@ -95,4 +96,19 @@ function checkBodyFlex() {
     console.log('Loaded correctly.');
   }
 }
+
+//reload on no websocket connection
+function checkWebSocketConnection() {
+  if (!Socket || Socket.readyState !== WebSocket.OPEN) {
+    console.log('WebSocket nie jest połączony, odświeżam stronę...');
+    location.reload();
+  }
+}
+
+window.addEventListener('focus', checkWebSocketConnection);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    checkWebSocketConnection();
+  }
+});
 
